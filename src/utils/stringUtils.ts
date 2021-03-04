@@ -1,13 +1,21 @@
-const levenshtien = require('damerau-levenshtein');
+// import * as levenshtien from 'damerau-levenshtien';
+import levenshtien from 'damerau-levenshtien';
+
+interface LevenshteinResponse {
+    steps: number;
+    relative: number;
+    similarity: number;
+}
+
 
 export function getSimilarity(x: string, y: string): number {
-    const result = levenshtien(x, y);
+    const result: LevenshteinResponse = levenshtien(x, y);
     return result.similarity;
 }
 
 export function getSimilarString(s: string, dictionary: string[]): string | undefined {
     const results = dictionary.map((word) => {
-        const result = levenshtien(word, s);
+        const result: LevenshteinResponse = levenshtien(word, s);
         const similarity = result.similarity;
         return { word, similarity };
     });

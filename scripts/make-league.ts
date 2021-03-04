@@ -154,7 +154,7 @@ async function queryCoaches(numCoaches: number): Promise<CoachData[]> {
 async function pickOwnerId(coaches: CoachData[]): Promise<string> {
     console.log('The owner of the league is');
     const ownerName = await pickOne(coaches.map(x => x.name));
-    return coaches.find(x => x.name === ownerName)!.id;
+    return coaches.find(x => x.name === ownerName)?.id ?? "";
 }
 
 async function main() {
